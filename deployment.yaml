@@ -2,7 +2,7 @@ kind: Service      # 指定创建资源的角色/类型
 apiVersion: v1     # 指定api版本，此值必须在kubectl api-versions中
 metadata:          # 资源的元数据/属性
   name: rancher-repo    # 资源的名字，在同一个namespace中必须唯一
-  namespace: default
+  namespace: test-githua
 spec:               # 资源规范字段
   selector:         # 选择器
     app: center
@@ -16,7 +16,7 @@ apiVersion: apps/v1   # 指定api版本，此值必须在kubectl api-versions中
 kind: Deployment      # 指定创建资源的角色/类型
 metadata:             # 资源的元数据/属性
   name: rancher-repo    # 资源的名字，在同一个namespace中必须唯一
-  namespace: default    # 资源的名字，在同一个namespace中必须唯一
+  namespace: test-githua    # 资源的名字，在同一个namespace中必须唯一
 spec:                 # 资源规范字段
   replicas: 1         # 声明副本数目
   selector: # 选择器

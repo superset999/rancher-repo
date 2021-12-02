@@ -9,7 +9,7 @@ stages:
       - publishImageConfig:
           dockerfilePath: ./Dockerfile
           buildContext: .
-          tag: collect-info-server:${CICD_GIT_BRANCH}
+          tag: rancher-repo:${CICD_GIT_BRANCH}
           #pushRemote: true
           #registry: images.kylinos.cn
         env:
