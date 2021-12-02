@@ -1,0 +1,36 @@
+kind: Service      # 指定创建资源的角色/类型
+apiVersion: v1     # 指定api版本，此值必须在kubectl api-versions中
+metadata:          # 资源的元数据/属性
+  name: rancher-repo    # 资源的名字，在同一个namespace中必须唯一
+  namespace: default
+spec:               # 资源规范字段
+  selector:         # 选择器
+    app: center
+  type: NodePort    # 端口类型
+  ports:
+    - protocol: TCP     # 协议
+      port: 30000          # service 端口
+      targetPort: 30000    # 容器暴露的端口
+---
+apiVersion: apps/v1   # 指定api版本，此值必须在kubectl api-versions中
+kind: Deployment      # 指定创建资源的角色/类型
+metadata:             # 资源的元数据/属性
+  name: rancher-repo    # 资源的名字，在同一个namespace中必须唯一
+  namespace: default    # 资源的名字，在同一个namespace中必须唯一
+spec:                 # 资源规范字段
+  replicas: 1         # 声明副本数目
+  selector: # 选择器
+    matchLabels: # 匹配标签
+      app: rancher-repo
+  template:           # 模版
+    metadata: # 资源的元数据/属性
+      labels: # 设定资源的标签
+        app: rancher-repo
+    spec:             # 资源规范字段
+      imagePullSecrets:                    # 镜像仓库拉取密钥
+        - name: pipeline-docker-registry
+      containers:
+        - name: rancher-repo                  # 容器的名字
+          image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}   # 容器使用的镜像地址
+          ports:
+            - containerPort: 30000               # 容器开发对外的端口
