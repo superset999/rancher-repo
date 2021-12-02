@@ -1,0 +1,6 @@
+server:
+  port: 30000
+spring:
+  application:
+    name: rancher-repo
+
