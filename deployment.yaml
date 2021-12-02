@@ -31,6 +31,6 @@ spec:                 # 资源规范字段
         - name: pipeline-docker-registry
       containers:
         - name: rancher-repo                  # 容器的名字
-          image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}   # 容器使用的镜像地址
+          image: ${CICD_IMAGE}:${CICD_GIT_BRANCH} #${CICD_EXECUTION_SEQUENCE}容器使用的镜像地址
           ports:
             - containerPort: 30000               # 容器开发对外的端口
